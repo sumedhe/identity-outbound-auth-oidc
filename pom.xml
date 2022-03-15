@@ -24,12 +24,12 @@
         <version>1.4</version>
     </parent>
 
-    <groupId>org.wso2.carbon.identity.outbound.auth.oidc</groupId>
+    <groupId>org.asgardeo.enterprise.auth.oidc</groupId>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>identity-application-auth-oidc</artifactId>
+    <artifactId>asgardeo-enterprise-idp</artifactId>
     <version>5.6.14</version>
     <packaging>pom</packaging>
-    <name>WSO2 Carbon - OpenID Connect Application Authenticator Feature Aggregator Module</name>
+    <name>Asgardeo Enterprise IDP Outbound Authenticator</name>
     <description>
 
     </description>
@@ -333,8 +333,8 @@
     </properties>
 
     <modules>
-        <module>components/org.wso2.carbon.identity.application.authenticator.oidc</module>
-        <module>features/org.wso2.carbon.identity.application.authenticator.oidc.server.feature</module>
+        <module>components/org.asgardeo.enterprise.authenticator.oidc</module>
+<!--        <module>features/org.wso2.carbon.identity.application.authenticator.oidc.server.feature</module>-->
     </modules>
 
 </project>
