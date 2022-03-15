@@ -60,6 +60,7 @@ import org.wso2.carbon.identity.core.util.IdentityCoreConstants;
 import org.wso2.carbon.identity.core.util.IdentityDatabaseUtil;
 import org.wso2.carbon.identity.core.util.IdentityTenantUtil;
 import org.wso2.carbon.identity.core.util.IdentityUtil;
+import org.wso2.carbon.identity.oauth.OAuthAdminService;
 import org.wso2.carbon.identity.oauth.OAuthAdminServiceImpl;
 import org.wso2.carbon.identity.oauth.common.OAuthConstants;
 import org.wso2.carbon.identity.oauth.dto.OAuthConsumerAppDTO;
@@ -419,9 +420,9 @@ public class OpenIDConnectAuthenticator extends AbstractApplicationAuthenticator
 
                     int outboundSpId = getOutboundSpId(outboundSpTenantID);
                     ApplicationManagementService applicationManagementService =
-                            ApplicationManagementService.getInstance();
+                            OpenIDConnectAuthenticatorDataHolder.getInstance().getApplicationManagementService();
 
-                    ServiceProvider serviceProvider =
+                        ServiceProvider serviceProvider =
                             applicationManagementService.getServiceProvider(outboundSpId);
                     InboundAuthenticationRequestConfig openIDConnectConfiguration =
                             getAuthenticationConfig(serviceProvider);
@@ -430,7 +431,8 @@ public class OpenIDConnectAuthenticator extends AbstractApplicationAuthenticator
                         String clientId = openIDConnectConfiguration.getInboundAuthKey();
                         authenticatorProperties.put(OIDCAuthenticatorConstants.CLIENT_ID, clientId);
 
-                        OAuthAdminServiceImpl oAuthAdminServiceImpl = new OAuthAdminServiceImpl();
+                        OAuthAdminService oAuthAdminServiceImpl =
+                                OpenIDConnectAuthenticatorDataHolder.getInstance().getOAuthAdminService();
                         OAuthConsumerAppDTO oauthApp = oAuthAdminServiceImpl.getOAuthApplicationData(clientId);
 
                         String authzEndpoint = getOIDCAuthzEndpoint(authenticatorProperties);

@@ -30,7 +30,9 @@ import org.wso2.carbon.identity.application.authenticator.oidc.OpenIDConnectAuth
 import org.wso2.carbon.identity.application.authenticator.oidc.logout.idpinit.factory.LogoutRequestFactory;
 import org.wso2.carbon.identity.application.authenticator.oidc.logout.idpinit.factory.LogoutResponseFactory;
 import org.wso2.carbon.identity.application.authenticator.oidc.logout.idpinit.processor.FederatedIdpInitLogoutProcessor;
+import org.wso2.carbon.identity.application.mgt.ApplicationManagementService;
 import org.wso2.carbon.identity.claim.metadata.mgt.ClaimMetadataManagementService;
+import org.wso2.carbon.identity.oauth.OAuthAdminService;
 import org.wso2.carbon.user.core.service.RealmService;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -166,5 +168,52 @@ public class OpenIDConnectAuthenticatorServiceComponent {
             log.debug("Server Session Management Service is unset in the OpenID Connect Authenticator");
         }
         OpenIDConnectAuthenticatorDataHolder.getInstance().setUserSessionManagementService(null);
+    }
+
+    @Reference(
+            name = "identity.application.management.component",
+            service = ApplicationManagementService.class,
+            cardinality = ReferenceCardinality.MANDATORY,
+            policy = ReferencePolicy.DYNAMIC,
+            unbind = "unsetApplicationManagementService"
+    )
+    protected void setApplicationManagementService(ApplicationManagementService applicationManagementService) {
+
+        if (log.isDebugEnabled()) {
+            log.debug("Application Management Service is set in the OpenID Connect Authenticator");
+        }
+        OpenIDConnectAuthenticatorDataHolder.getInstance()
+                .setApplicationManagementService(applicationManagementService);
+    }
+
+    protected void unsetApplicationManagementService(ApplicationManagementService applicationManagementService) {
+
+        if (log.isDebugEnabled()) {
+            log.debug("Application Management Service is unset in the OpenID Connect Authenticator");
+        }
+        OpenIDConnectAuthenticatorDataHolder.getInstance().setApplicationManagementService(null);
+    }
+
+    @Reference(
+            name = "identity.oauth.component",
+            service = OAuthAdminService.class,
+            cardinality = ReferenceCardinality.MANDATORY,
+            policy = ReferencePolicy.DYNAMIC,
+            unbind = "unsetOAuthAdminService"
+    )
+    protected void setOAuthAdminService(OAuthAdminService oAuthAdminService) {
+
+        if (log.isDebugEnabled()) {
+            log.debug("Application Management Service is set in the OpenID Connect Authenticator");
+        }
+        OpenIDConnectAuthenticatorDataHolder.getInstance().setOAuthAdminService(oAuthAdminService);
+    }
+
+    protected void unsetOAuthAdminService(OAuthAdminService oAuthAdminService) {
+
+        if (log.isDebugEnabled()) {
+            log.debug("Application Management Service is unset in the OpenID Connect Authenticator");
+        }
+        OpenIDConnectAuthenticatorDataHolder.getInstance().setOAuthAdminService(null);
     }
 }

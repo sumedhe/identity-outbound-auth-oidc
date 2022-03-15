@@ -181,6 +181,16 @@
                 <version>${h2database.version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.identity.framework</groupId>
+                <artifactId>org.wso2.carbon.identity.application.mgt</artifactId>
+                <version>${carbon.identity.framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.identity.inbound.auth.oauth2</groupId>
+                <artifactId>org.wso2.carbon.identity.oauth</artifactId>
+                <version>${org.wso2.carbon.identity.oauth.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -272,8 +282,12 @@
 
         <identity.application.auth.oidc.package.export.version>${project.version}
         </identity.application.auth.oidc.package.export.version>
-
+        <carbon.identity.framework.version>5.20.107</carbon.identity.framework.version>
+        <carbon.identity.framework.imp.pkg.version.range>[5.18.203, 6.0.0)</carbon.identity.framework.imp.pkg.version.range>
         <carbon.identity.framework.version>5.19.52</carbon.identity.framework.version>
+        <org.wso2.carbon.identity.oauth.version>6.4.158</org.wso2.carbon.identity.oauth.version>
+        <org.wso2.carbon.identity.oauth.imp.pkg.version.range>[6
+            .4.156, 6.4.200)</org.wso2.carbon.identity.oauth.imp.pkg.version.range>
         <oltu.version>1.0.0.wso2v3</oltu.version>
         <json-smart.version>2.3</json-smart.version>
         <json.wso2.version>3.0.0.wso2v1</json.wso2.version>

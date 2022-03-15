@@ -18,7 +18,9 @@ package org.wso2.carbon.identity.application.authenticator.oidc.internal;
 
 import org.wso2.carbon.identity.application.authentication.framework.ServerSessionManagementService;
 import org.wso2.carbon.identity.application.authentication.framework.UserSessionManagementService;
+import org.wso2.carbon.identity.application.mgt.ApplicationManagementService;
 import org.wso2.carbon.identity.claim.metadata.mgt.ClaimMetadataManagementService;
+import org.wso2.carbon.identity.oauth.OAuthAdminService;
 import org.wso2.carbon.user.core.service.RealmService;
 
 public class OpenIDConnectAuthenticatorDataHolder {
@@ -32,6 +34,10 @@ public class OpenIDConnectAuthenticatorDataHolder {
     private ServerSessionManagementService serverSessionManagementService;
 
     private UserSessionManagementService userSessionManagementService;
+
+    private ApplicationManagementService applicationManagementService;
+
+    private OAuthAdminService oAuthAdminService;
 
     private OpenIDConnectAuthenticatorDataHolder() {
 
@@ -82,5 +88,21 @@ public class OpenIDConnectAuthenticatorDataHolder {
             UserSessionManagementService userSessionManagementService) {
 
         this.userSessionManagementService = userSessionManagementService;
+    }
+
+    public ApplicationManagementService getApplicationManagementService() {
+        return applicationManagementService;
+    }
+
+    public void setApplicationManagementService(ApplicationManagementService applicationManagementService) {
+        this.applicationManagementService = applicationManagementService;
+    }
+
+    public OAuthAdminService getOAuthAdminService() {
+        return oAuthAdminService;
+    }
+
+    public void setOAuthAdminService(OAuthAdminService oAuthAdminService) {
+        this.oAuthAdminService = oAuthAdminService;
     }
 }
