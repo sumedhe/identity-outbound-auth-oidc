@@ -375,7 +375,7 @@ public class OpenIDConnectAuthenticator extends AbstractApplicationAuthenticator
             InboundAuthenticationRequestConfig[] inbounds = inboundAuthConfig.getInboundAuthenticationRequestConfigs();
             if (inbounds != null) {
                 return Arrays.stream(inbounds)
-                        .filter(inbound -> "OAUTH2".equals(inbound.getInboundAuthType()))
+                        .filter(inbound -> "oauth2".equals(inbound.getInboundAuthType()))
                         .findAny()
                         .orElse(null);
             }
@@ -426,12 +426,11 @@ public class OpenIDConnectAuthenticator extends AbstractApplicationAuthenticator
                             applicationManagementService.getServiceProvider(outboundSpId);
                     InboundAuthenticationRequestConfig openIDConnectConfiguration =
                             getAuthenticationConfig(serviceProvider);
-                System.out.println("reached here check 2");
                     if (openIDConnectConfiguration != null) {
                         String clientId = openIDConnectConfiguration.getInboundAuthKey();
                         authenticatorProperties.put(OIDCAuthenticatorConstants.CLIENT_ID, clientId);
 
-                        OAuthAdminService oAuthAdminServiceImpl =
+                        OAuthAdminServiceImpl oAuthAdminServiceImpl =
                                 OpenIDConnectAuthenticatorDataHolder.getInstance().getOAuthAdminService();
                         OAuthConsumerAppDTO oauthApp = oAuthAdminServiceImpl.getOAuthApplicationData(clientId);
 
@@ -462,7 +461,6 @@ public class OpenIDConnectAuthenticator extends AbstractApplicationAuthenticator
     protected void initiateAuthenticationRequest(HttpServletRequest request, HttpServletResponse response,
                                                  AuthenticationContext context) throws AuthenticationFailedException {
 
-        System.out.println("reached here");
             try {
                 Map<String, String> authenticatorProperties = context.getAuthenticatorProperties();
                 authenticatorProperties = resolveTenantIDP(context, authenticatorProperties);

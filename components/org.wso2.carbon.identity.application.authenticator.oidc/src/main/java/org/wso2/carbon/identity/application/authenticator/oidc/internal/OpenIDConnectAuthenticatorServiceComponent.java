@@ -33,6 +33,7 @@ import org.wso2.carbon.identity.application.authenticator.oidc.logout.idpinit.pr
 import org.wso2.carbon.identity.application.mgt.ApplicationManagementService;
 import org.wso2.carbon.identity.claim.metadata.mgt.ClaimMetadataManagementService;
 import org.wso2.carbon.identity.oauth.OAuthAdminService;
+import org.wso2.carbon.identity.oauth.OAuthAdminServiceImpl;
 import org.wso2.carbon.user.core.service.RealmService;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -196,20 +197,20 @@ public class OpenIDConnectAuthenticatorServiceComponent {
 
     @Reference(
             name = "identity.oauth.component",
-            service = OAuthAdminService.class,
+            service = OAuthAdminServiceImpl.class,
             cardinality = ReferenceCardinality.MANDATORY,
             policy = ReferencePolicy.DYNAMIC,
             unbind = "unsetOAuthAdminService"
     )
-    protected void setOAuthAdminService(OAuthAdminService oAuthAdminService) {
+    protected void setOAuthAdminService(OAuthAdminServiceImpl oAuthAdminService) {
 
         if (log.isDebugEnabled()) {
-            log.debug("Application Management Service is set in the OpenID Connect Authenticator");
+            log.debug("OAuth Management Service is set in the OpenID Connect Authenticator");
         }
         OpenIDConnectAuthenticatorDataHolder.getInstance().setOAuthAdminService(oAuthAdminService);
     }
 
-    protected void unsetOAuthAdminService(OAuthAdminService oAuthAdminService) {
+    protected void unsetOAuthAdminService(OAuthAdminServiceImpl oAuthAdminService) {
 
         if (log.isDebugEnabled()) {
             log.debug("Application Management Service is unset in the OpenID Connect Authenticator");
